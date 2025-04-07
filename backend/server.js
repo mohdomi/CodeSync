@@ -9,6 +9,21 @@ import { generateResult } from './services/gemini.service.js';
 
 const port = process.env.PORT || 3000;
 
+const allowedOrigins = process.env.FRONTEND_URL.split(',');
+
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true
+};
+
+app.use(cors(corsOptions));
+
 // MongoDB connection
 mongoose.connect(process.env.MONGO_URI)
     .then(() => console.log('Connected to MongoDB'))
@@ -20,7 +35,7 @@ mongoose.connect(process.env.MONGO_URI)
 const server = http.createServer(app);
 const io = new Server(server, {
     cors: {
-        origin: process.env.FRONTEND_URL,
+        origin: allowedOrigins,
         methods: ['GET', 'POST'],
         credentials: true
     }
