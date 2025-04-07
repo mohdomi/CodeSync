@@ -6,6 +6,7 @@ import jwt from 'jsonwebtoken';
 import mongoose from 'mongoose';
 import Project from './models/project.model.js';
 import { generateResult } from './services/gemini.service.js';
+import cors from 'cors';
 
 const port = process.env.PORT || 3000;
 
