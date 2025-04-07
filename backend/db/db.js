@@ -1,14 +1,14 @@
 import mongoose from 'mongoose';
 
-console.log(process.env.MONGO_URI)
+console.log(typeof(process.env.MONGO_URI))
 
-function connect(){
+function createConnection(){
     mongoose.connect(process.env.MONGO_URI).then(()=>{
         console.log("db connected")
     }).catch(err=>{
-        console.log(err)
+        console.log("MongoDb Error : " , err)
     })
 }
+ 
 
-
-export default connect;
+export default createConnection;

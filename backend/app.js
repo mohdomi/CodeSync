@@ -1,14 +1,14 @@
 import express from 'express'
 import morgan from 'morgan';
-import connect from './db/db.js';
+import createConnection from './db/db.js';
 import userRouter from './routes/user.routes.js'
 import projectRouter from './routes/project.routes.js';
 import cookieParser from 'cookie-parser';
 import aiRouter from './routes/ai.routes.js'
-connect();
 import cors from 'cors';
 
 const app = express();
+createConnection();
 app.use(cors())
 app.use(express.json());
 app.use(cookieParser());
