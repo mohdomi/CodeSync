@@ -13,7 +13,7 @@ app.use((req, res, next) => {
     res.setHeader("Cross-Origin-Opener-Policy", "same-origin");
     res.setHeader("Cross-Origin-Embedder-Policy", "require-corp");
     next();
-  });  
+});  
 
 createConnection();
 app.use(cors())
@@ -25,9 +25,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended : true}));
 app.use('/users' , userRouter);
 app.use('/projects' , projectRouter);
-
 app.use('/ai' , aiRouter);
-
 
 app.get('/' , (req,res)=>{
 

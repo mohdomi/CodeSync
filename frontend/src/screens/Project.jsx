@@ -3,7 +3,6 @@ import { useLocation } from "react-router-dom";
 import axiosInstance from "../config/axios";
 import { initializeSocket, receiveMessage, sendMessage, disconnectSocket } from "../config/socket";
 import { UserContext } from "../context/user.context";
-import { getWebContainer } from "../config/webcontainer";
 import Markdown from 'markdown-to-jsx';
 
 const Project = () => {
@@ -23,7 +22,6 @@ const Project = () => {
     const [fileTree, setFileTree] = useState({});
     const [currentFile, setCurrentFile] = useState(null);
     const [openFiles, setOpenFiles] = useState([]);
-    const [webContainer, setWebContainer] = useState(null);
     const [error, setError] = useState(null);
     const [socketConnected, setSocketConnected] = useState(false);
 
@@ -45,10 +43,6 @@ const Project = () => {
                 
                 if (message.fileTree) {
                     setFileTree(message.fileTree);
-                    // Only attempt mount if webContainer exists
-                    if (webContainer) {
-                        webContainer.mount(message.fileTree);
-                    }
                 }
                 setMessages(prevMessages => [...prevMessages, data]);
             } catch (err) {
@@ -66,18 +60,6 @@ const Project = () => {
         receiveMessage('disconnect', () => {
             setSocketConnected(false);
         });
-
-        // Initialize web container
-        if (!webContainer) {
-            getWebContainer()
-                .then(container => {
-                    setWebContainer(container);
-                })
-                .catch(err => {
-                    console.error("Failed to initialize web container:", err);
-                    setError("Failed to initialize code editor");
-                });
-        }
 
         // Fetch users
         axiosInstance.get('users/all', {
