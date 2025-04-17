@@ -161,7 +161,7 @@ const Project = () => {
         return (
             <div 
                 key={msg._id || Math.random()} 
-                className={`${isAi ? 'max-w-80' : 'max-w-52'} 
+                className={`${isAi ? 'max-w-80 overflow-x-auto overflow-y-visible whitespace-nowrap' : 'max-w-52'} 
                           ${isCurrentUser ? 'ml-auto' : ''} 
                           message flex flex-col p-3 
                           ${isCurrentUser ? 'bg-blue-600 text-white' : 'bg-gray-200 dark:bg-gray-700 dark:text-white'} 
