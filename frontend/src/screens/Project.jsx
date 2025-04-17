@@ -169,7 +169,7 @@ const Project = () => {
             >
                 <small className='opacity-75 text-xs mb-1'>{msg.sender.email}</small>
                 <div className='text-sm'>
-                    {isAi ? <Markdown>{msg.message}</Markdown> : msg.message}
+                    {isAi ? <Markdown className="max-w-80">{msg.message}</Markdown> : msg.message}
                 </div>
             </div>
         );
