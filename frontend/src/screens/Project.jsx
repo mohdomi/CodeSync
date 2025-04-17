@@ -254,7 +254,7 @@ const Project = () => {
                             <i className="ri-close-fill text-xl"></i>
                         </button>
                     </header>
-                    <div className="users flex flex-col p-4">
+                    <div className="users flex flex-col p-4 overflow-y-auto">
                         {users.map(user => (
                             <div 
                                 key={user._id}
